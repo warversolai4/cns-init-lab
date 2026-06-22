@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+        }
+
+        .wrapper {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* 深色头图 — 简洁目录感 */
+        .hero {
+            background: linear-gradient(145deg, #0b1a2e 0%, #13273f 100%);
+            color: #e9edf2;
+            padding: 64px 0 56px;
+            margin-bottom: 48px;
+            border-radius: 0 0 32px 32px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+        }
+
+        .hero-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: #ffffff;
+            max-width: 780px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(120deg, #facc15, #f59e0b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #b6c9e0;
+            max-width: 680px;
+            border-left: 3px solid #facc15;
+            padding-left: 18px;
+            margin-top: 4px;
+        }
+
+        .hero-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 32px;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: #8ba3c2;
+        }
+
+        .hero-meta a {
+            color: #facc15;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(250, 204, 21, 0.25);
+            transition: border-color 0.15s;
+        }
+
+        .hero-meta a:hover {
+            border-color: #facc15;
+        }
+
+        /* 知识库目录式布局 */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #0f172a;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .section-title small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #64748b;
+            margin-left: auto;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px 20px 26px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #e9edf4;
+            transition: box-shadow 0.2s, transform 0.1s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transform: translateY(-2px);
+        }
+
+        .card h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0f172a;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #334155;
+            margin-bottom: 12px;
+        }
+
+        .card .tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            background: #eef2f6;
+            padding: 2px 10px;
+            border-radius: 20px;
+            color: #475569;
+            letter-spacing: 0.02em;
+        }
+
+        .card-highlight {
+            border-left: 4px solid #facc15;
+            background: #fafcff;
+        }
+
+        .info-list {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 28px 24px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 40px;
+        }
+
+        .info-list dt {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-top: 18px;
+            margin-bottom: 6px;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-list dt:first-of-type {
+            margin-top: 0;
+        }
+
+        .info-list dd {
+            margin-left: 0;
+            font-size: 0.95rem;
+            color: #334155;
+            padding-left: 20px;
+            border-left: 2px solid #e2e8f0;
+            margin-bottom: 10px;
+        }
+
+        .info-list a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+            transition: border-color 0.15s;
+        }
+
+        .info-list a:hover {
+            border-bottom-color: #2563eb;
+        }
+
+        .notice-area {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 24px 28px;
+            border: 1px dashed #cbd5e1;
+            margin-bottom: 48px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 10px 20px;
+        }
+
+        .notice-area strong {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .notice-area a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .notice-area a:hover {
+            border-bottom-color: #2563eb;
+        }
+
+        .faq-summary {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 32px;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 24px 28px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 48px;
+        }
+
+        .faq-summary details {
+            border-bottom: 1px solid #f1f5f9;
+            padding: 10px 0;
+        }
+
+        .faq-summary details:last-of-type {
+            border-bottom: none;
+        }
+
+        .faq-summary summary {
+            font-weight: 500;
+            cursor: pointer;
+            color: #0f172a;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .faq-summary summary::before {
+            content: "▸";
+            color: #facc15;
+            font-size: 1rem;
+            transition: transform 0.15s;
+        }
+
+        .faq-summary details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-summary .faq-answer {
+            font-size: 0.9rem;
+            color: #475569;
+            margin-top: 8px;
+            padding-left: 22px;
+        }
+
+        .faq-summary a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.2);
+        }
+
+        .faq-summary a:hover {
+            border-bottom-color: #2563eb;
+        }
+
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 24px;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+            background: #ffffff;
+            padding: 20px 24px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .related-links span {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .related-links a {
+            color: #2563eb;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(37, 99, 235, 0.15);
+        }
+
+        .related-links a:hover {
+            border-bottom-color: #2563eb;
+        }
+
+        footer {
+            text-align: center;
+            padding: 32px 0 40px;
+            color: #64748b;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 16px;
+        }
+
+        @media (max-width: 720px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .faq-summary {
+                grid-template-columns: 1fr;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-meta {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper {
+                padding: 0 16px;
+            }
+            .hero {
+                padding: 40px 0 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+
+        <!-- 深色头图：目录感 + 说明区 -->
+        <header class="hero">
+            <div class="hero-inner">
+                <h1>世界杯 · 知识库<span>索引</span></h1>
+                <p>从赛制沿革、数据纪录到文化观察，围绕<span style="color:#facc15; font-weight:500;">世界杯</span>的稳定信息入口。本页作为导航目录与说明文档，帮助检索关键资料。</p>
+                <div class="hero-meta">
+                    <span>📋 收录条目 24+</span>
+                    <span>🔖 最近更新 2025.03</span>
+                    <span>🏷️ 主领域：<a href="https://cns-init-sjb.com">世界杯</a></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 介绍 + 特点卡片：目录式卡片 -->
+        <div class="section-title">
+            📌 说明区 · 核心特点
+            <small>稳定入口 & 结构化指引</small>
+        </div>
+
+        <div class="card-grid">
+            <div class="card card-highlight">
+                <h3>📚 知识聚合</h3>
+                <p>围绕<span style="font-weight:500;">世界杯</span>整理赛事档案、球队数据、经典对阵与规则变迁，减少信息碎片。</p>
+                <span class="tag">结构化</span>
+            </div>
+            <div class="card">
+                <h3>🗂️ 目录索引</h3>
+                <p>按年代、区域、赛会阶段分类。每一条目附来源摘要与更新时间，适配深度查阅场景。</p>
+                <span class="tag">入口</span>
+            </div>
+            <div class="card">
+                <h3>⚽ 动态补充</h3>
+                <p>随新赛程与历史研究不定期增补。近期加入 2002–2022 决赛圈数据对比与冷门纪录。</p>
+                <span class="tag">迭代中</span>
+            </div>
+            <div class="card">
+                <h3>🔍 交叉引用</h3>
+                <p>链接指向 <a href="https://cns-init-sjb.com" style="color:#2563eb; text-decoration:none; border-bottom:1px solid rgba(37,99,235,0.2);">世界杯</a> 主站对应页面，保持信息同源与可追溯。</p>
+                <span class="tag">可验证</span>
+            </div>
+        </div>
+
+        <!-- 提示区 + 相关信息 -->
+        <div class="notice-area">
+            <strong>💡 提示区</strong>
+            <span>本页面为静态知识入口，不收集数据、无自动跳转。所有引用均指向 <a href="https://cns-init-sjb.com">世界杯</a> 相关内容。</span>
+            <span style="font-size:0.9rem; color:#475569;">若需检索具体赛事，建议使用站内搜索或按年代浏览。</span>
+        </div>
+
+        <div class="section-title">
+            📖 相关信息 · 常见知识模块
+            <small>FAQ 摘要与速览</small>
+        </div>
+
+        <!-- FAQ 摘要区 -->
+        <div class="faq-summary">
+            <div>
+                <details>
+                    <summary>世界杯赛制经历了哪些主要变化？</summary>
+                    <div class="faq-answer">从 1930 年单淘汰到 1982 年小组‑淘汰混合，再到 2026 年扩军至 48 队。详细沿革见 <a href="https://cns-init-sjb.com">世界杯</a> 规则分页。</div>
+                </details>
+                <details>
+                    <summary>哪届赛事进球总数最多？</summary>
+                    <div class="faq-answer">2014 年巴西世界杯共进 171 球，场均 2.67 球。数据源经 <a href="https://cns-init-sjb.com">世界杯</a> 统计页核对。</div>
+                </details>
+                <details>
+                    <summary>历届冠军分布有何规律？</summary>
+                    <div class="faq-answer">南美与欧洲球队包揽全部冠军。巴西 5 次、德国 4 次、意大利 4 次、阿根廷 3 次、法国 2 次、乌拉圭 2 次、英格兰 1 次、西班牙 1 次。</div>
+                </details>
+            </div>
+            <div>
+                <details>
+                    <summary>冷知识：唯一以不败战绩夺冠的队伍？</summary>
+                    <div class="faq-answer">1970 年巴西队六战全胜，是首支全程无平局/失利的世界杯冠军。更多趣闻可查阅 <a href="https://cns-init-sjb.com">世界杯</a> 纪录库。</div>
+                </details>
+                <details>
+                    <summary>预选赛与正赛名额如何分配？</summary>
+                    <div class="faq-answer">六大洲足联分配名额，2026 年起亚洲 8.5、非洲 9.5、中北美 6.5、南美 6.5、大洋洲 1.5、欧洲 16。东道主自动入围。</div>
+                </details>
+                <details>
+                    <summary>页面信息更新频率？</summary>
+                    <div class="faq-answer">本知识库随主站 <a href="https://cns-init-sjb.com">世界杯</a> 内容同步，重大节点后 3–7 个工作日内补充。</div>
+                </details>
+            </div>
+        </div>
+
+        <!-- 相关信息区附加链接 -->
+        <div class="related-links">
+            <span>📎 相关信息</span>
+            <a href="https://cns-init-sjb.com">世界杯</a>
+            <span style="color:#94a3b8;">·</span>
+            <a href="https://cns-init-sjb.com" style="border-bottom-style:dashed;">世界杯</a>
+            <span style="color:#94a3b8;">·</span>
+            <span style="color:#475569;">球队档案</span>
+            <span style="color:#94a3b8;">·</span>
+            <span style="color:#475569;">裁判规则</span>
+        </div>
+
+        <footer>
+            <p>知识库入口 · 基于 <a href="https://cns-init-sjb.com" style="color:#2563eb; text-decoration:none; border-bottom:1px solid rgba(37,99,235,0.2);">世界杯</a> 资料整理 · 内容仅供参考</p>
+        </footer>
+
+    </div>
+</body>
+</html>
